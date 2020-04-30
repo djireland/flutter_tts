@@ -12,7 +12,7 @@ public class SwiftFlutterTtsPlugin: NSObject, FlutterPlugin, AVSpeechSynthesizer
   var voice: AVSpeechSynthesisVoice?
 
   var channel = FlutterMethodChannel()
-  lazy var audioSession = AVAudioSession.sharedInstance()
+  //lazy var audioSession = AVAudioSession.sharedInstance()
 
   init(channel: FlutterMethodChannel) {
     super.init()
@@ -21,11 +21,11 @@ public class SwiftFlutterTtsPlugin: NSObject, FlutterPlugin, AVSpeechSynthesizer
     setLanguages()
     
     // Allow audio playback when the Ring/Silent switch is set to silent
-    do {
-      try audioSession.setCategory(.playAndRecord, options: [ .mixWithOthers])
-    } catch {
-      print(error)
-    }
+   // do {
+   //   try audioSession.setCategory(.playAndRecord, options: [ .mixWithOthers])
+   // } catch {
+   //   print(error)
+   // }
   }
 
   private func setLanguages() {
@@ -191,11 +191,11 @@ public class SwiftFlutterTtsPlugin: NSObject, FlutterPlugin, AVSpeechSynthesizer
   }
 
   public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-    do {
-      try audioSession.setActive(false, options: .notifyOthersOnDeactivation)
-    } catch {
-      print(error)
-    }
+    //do {
+    //  try audioSession.setActive(false, options: .notifyOthersOnDeactivation)
+    //} catch {
+    //  print(error)
+   // }
     self.channel.invokeMethod("speak.onComplete", arguments: nil)
   }
 
